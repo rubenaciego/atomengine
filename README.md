@@ -4,7 +4,6 @@ A simple game engine that I am making just for learning and fun
 To do:
 
 <ul>
-
 	<li>Make a 2D physics API
 	<li>Design a consistent and good API
 	<li>Make a 2D light API (almost done)
