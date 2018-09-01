@@ -1,14 +1,13 @@
 #include <Atom.hpp>
 #include "MainScene.hpp"
 
-using namespace atom;
+using namespace Atom;
 
 int main(int argc, const char* argv[])
 {
 	Engine::Init("Atom Engine", 1024, 576);
 	
-	SceneManager::Add<MainScene>("MainScene");
-	SceneManager::LoadScene(0);
+	SceneManager::LoadScene<MainScene>();
 
 	while (Engine::Running())
 		Engine::Update();
@@ -17,11 +16,3 @@ int main(int argc, const char* argv[])
 
 	return 0;
 }
-
-/*
-	TODO:
-		- 2D physics
-		- improve API
-		- some kind of multithreading
-		- fix bugs (audio ?)
-*/

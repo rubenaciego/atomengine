@@ -1,7 +1,8 @@
 #include "MainScene.hpp"
 
-MainScene::MainScene() : shader(new Shader("Shaders/StandardShader.vert",
-	"Shaders/StandardShader.frag")), layer(shader)
+MainScene::MainScene() : layer(new Renderer2D(), nullptr),
+	light1(512, Vector2(2.0f, 0.0f), Color(0xFF00FFFF)),
+	light2(512, Vector2(-4.0f, 2.0f), Color(255, 0, 0))
 {
 	FontManager::Add(new Font("Fonts/Consolas.ttf", "Consolas", 50));
 	AudioManager::Add(new Sound("MainTheme", "Sound/Menu.wav"));
@@ -15,6 +16,9 @@ MainScene::MainScene() : shader(new Shader("Shaders/StandardShader.vert",
 	layer.Add(sp2);
 	layer.Add(label);
 
+	layer.Add(&light2);
+	layer.Add(&light1);
+
 	AudioManager::Get("MainTheme")->Loop();
 }
 
@@ -25,9 +29,7 @@ MainScene::~MainScene()
 
 void MainScene::Update()
 {
-	// shader->SetUniform2f("u_LightPos", Vector2(window.GetMouseX() * 32.0f / window.GetWidth() - 16.0f, 9.0f - window.GetMouseY() * 18.0f / window.GetHeight()));
-
-	label->SetText("FPS: " + std::to_string((int)(1.0f / Time::DeltaTime())));
+	label->SetText("FPS: " + std::to_string((int)(1.0f / Time::deltaTime)));
 
 	if (Input::IsKeyTyped(KEY_P))
 		AudioManager::Get("MainTheme")->Pause();
@@ -57,5 +59,5 @@ void MainScene::Update()
 
 void MainScene::Render()
 {
-	layer.Render();
+	layer.Render(&cam);
 }

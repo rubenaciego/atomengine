@@ -2,24 +2,7 @@
 
 #include <Atom.hpp>
 
-using namespace atom;
-
-class TileLayer : public Layer
-{
-public:
-	TileLayer(Shader* shader) : Layer(new Renderer2D(), shader,
-		Matrix4::Orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f))
-	{
-		int textures[16] = {
-			0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
-		};
-
-		shader->Bind();
-		shader->SetUniform1iv("u_Textures", 16, textures);
-	}
-
-	~TileLayer() {}
-};
+using namespace Atom;
 
 class Mario : public Sprite
 {
@@ -32,7 +15,7 @@ public:
 		Sprite(x, y, width, height, texture), body(0, 0, Vector2(m_Size.x*m_Scale.x, m_Size.y*m_Scale.y)) {}
 };
 
-class MainScene : Scene
+class MainScene : public Scene
 {
 public:
 	MainScene();
@@ -41,10 +24,12 @@ public:
 	void Render() override;
 	
 private:
-	Shader* shader;
-	TileLayer layer;
+	Layer layer;
 	Label* label;
 	Texture* texture;
 	Mario* sp1;
+	Light2D light1;
+	Light2D light2;
 	Mario* sp2;
+	Camera cam;
 };
