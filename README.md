@@ -14,7 +14,7 @@ To do:
 	<li>Implement Box2D's debug draws
 	<li>Make DrawLine, DrawRect, DrawEllipse functions
 	<li>3D rendering ;)
-	<li>Networking (far milestone)
+	<li>Networking (maybe)
 	<li>Port to other platforms
 	<li>Native windowing
 <ul/>
